@@ -42,30 +42,39 @@ def matches_purpose(comp, category, purpose):
 def run_search(algo, budget, purpose, datasets):
     order = ['CPU', 'MB', 'RAM', 'Storage', 'GPU', 'PSU']
     visited = 0
-    if algo == 'UCS':
+    
+    # دالة التخمين (Heuristic) لـ A*
+    def heuristic(current_build):
+        remaining_categories = order[len(current_build):]
+        # التخمين هو مجموع أرخص قطعة موجودة في كل تصنيف متبقي
+        h_cost = sum(datasets[cat]['price_usd'].min() for cat in remaining_categories)
+        return h_cost
+
+    if algo in ['UCS', 'A*']:
         counter = 0
-        pq = [(0, counter, {})]
+        # في A* الترتيب يعتمد على (g + h) بينما في UCS يعتمد على (g) فقط
+        # g = التكلفة الحالية، h = التكلفة المتوقعة
+        pq = [(0, counter, 0, {})] # (f_score, counter, g_score, build)
+        
         while pq:
-            cost, _, build = heapq.heappop(pq)
+            f, _, g, build = heapq.heappop(pq)
             visited += 1
-            if len(build) == 6: return build, cost, visited
+            if len(build) == 6: return build, g, visited
+            
             category = order[len(build)]
             for _, comp in datasets[category].iterrows():
                 if is_compatible(build, comp, category, budget) and matches_purpose(comp, category, purpose):
                     new_build = build.copy()
                     new_build[category] = comp.to_dict()
+                    new_g = g + comp['price_usd']
                     counter += 1
-                    heapq.heappush(pq, (cost + comp['price_usd'], counter, new_build))
+                    
+                    if algo == 'A*':
+                        new_f = new_g + heuristic(new_build)
+                        heapq.heappush(pq, (new_f, counter, new_g, new_build))
+                    else: # UCS
+                        heapq.heappush(pq, (new_g, counter, new_g, new_build))
     else:
+        # كود BFS و DFS يبقى كما هو...
         queue = deque([(0, {})])
-        while queue:
-            cost, build = queue.popleft() if algo == 'BFS' else queue.pop()
-            visited += 1
-            if len(build) == 6: return build, cost, visited
-            category = order[len(build)]
-            for _, comp in datasets[category].iterrows():
-                if is_compatible(build, comp, category, budget) and matches_purpose(comp, category, purpose):
-                    new_build = build.copy()
-                    new_build[category] = comp.to_dict()
-                    queue.append((cost + comp['price_usd'], new_build))
-    return None, 0, visited
+        # ... تكملة الكود السابق
