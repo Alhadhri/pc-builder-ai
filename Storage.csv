@@ -1,0 +1,7 @@
+storage_id,name,type,capacity_gb,interface,read_mbps,write_mbps,price_usd
+ST1,Samsung 970 EVO Plus,SSD,1000,NVMe,3500,3300,90
+ST2,Samsung 980 Pro,SSD,1000,NVMe,7000,5000,140
+ST3,WD Blue SN570,SSD,1000,NVMe,3500,3000,80
+ST7,Samsung 870 EVO,SSD,1000,SATA,560,530,85
+ST9,WD Blue HDD,HDD,2000,SATA,150,150,60
+ST10,Seagate Barracuda,HDD,2000,SATA,160,150,55

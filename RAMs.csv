@@ -1,0 +1,9 @@
+ram_id,name,ram_type,capacity_gb,modules,speed_mhz,price_usd
+RAM1,Corsair Vengeance LPX,DDR4,16,2,3200,60
+RAM2,G.Skill Ripjaws V,DDR4,16,2,3600,70
+RAM3,Kingston Fury Beast,DDR4,32,2,3200,120
+RAM4,Corsair Dominator Platinum,DDR4,32,2,3600,150
+RAM9,Corsair Vengeance DDR5,DDR5,32,2,5200,180
+RAM10,G.Skill Trident Z5,DDR5,32,2,6000,220
+RAM11,Kingston Fury Beast DDR5,DDR5,16,2,5200,130
+RAM12,Crucial DDR5,DDR5,16,2,4800,110

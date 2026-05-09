@@ -1,0 +1,8 @@
+psu_id,name,wattage,efficiency,modular,price_usd
+PSU1,Corsair CV450,450,Bronze,No,50
+PSU2,Corsair CV550,550,Bronze,No,60
+PSU3,Corsair RM650x,650,Gold,Yes,110
+PSU4,Corsair RM750x,750,Gold,Yes,130
+PSU5,Corsair RM850x,850,Gold,Yes,150
+PSU12,Seasonic Focus GX-750,750,Gold,Yes,135
+PSU13,Seasonic Prime TX-850,850,Titanium,Yes,200
